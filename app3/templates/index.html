@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aggregated Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .data-section {
+            margin-bottom: 20px;
+        }
+        .data-section h2 {
+            color: #555;
+        }
+        .data-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .data-section ul li {
+            background: #eee;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Aggregated Data</h1>
+        <div class="data-section" id="users-section">
+            <h2>Users</h2>
+            <ul id="users-list">
+                <!-- User data will be inserted here -->
+            </ul>
+        </div>
+        <div class="data-section" id="tasks-section">
+            <h2>Tasks</h2>
+            <ul id="tasks-list">
+                <!-- Task data will be inserted here -->
+            </ul>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/aggregated')
+                .then(response => response.json())
+                .then(data => {
+                    const usersList = document.getElementById('users-list');
+                    const tasksList = document.getElementById('tasks-list');
+
+                    data.users.forEach(user => {
+                        const li = document.createElement('li');
+                        li.textContent = `ID: ${user.id}, Name: ${user.name}`;
+                        usersList.appendChild(li);
+                    });
+
+                    data.tasks.forEach(task => {
+                        const li = document.createElement('li');
+                        li.textContent = `ID: ${task.id}, Description: ${task.description}`;
+                        tasksList.appendChild(li);
+                    });
+                });
+        });
+    </script>
+</body>
+</html>

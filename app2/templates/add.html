@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+</head>
+<body>
+    <h1>Add Task</h1>
+    <form action="{{ url_for('create_task') }}" method="POST">
+        <label for="task">Task:</label>
+        <input type="text" id="task" name="task" required>
+        <br>
+        <label for="time">Time:</label>
+        <input type="text" id="time" name="time">
+        <br>
+        <button type="submit">Add Task</button>
+    </form>
+    <a href="{{ url_for('get_tasks') }}">Back to Task List</a>
+</body>
+</html>
